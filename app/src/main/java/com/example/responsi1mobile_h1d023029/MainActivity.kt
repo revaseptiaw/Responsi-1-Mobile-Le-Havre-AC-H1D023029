@@ -17,11 +17,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 🔹 Atur teks dari strings.xml
+        // Atur teks dari strings.xml
         binding.tvClubName.text = getString(R.string.club_name)
         binding.tvDescription.text = getString(R.string.desc_club)
 
-        // 🔹 Atur teks & ikon tiap menu
+        // Atur teks & ikon tiap menu
         binding.layoutHistory.tvLayout.text = getString(R.string.history)
         binding.layoutHistory.imgIcon.setImageResource(R.drawable.ic_history)
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding.layoutTeam.tvLayout.text = getString(R.string.teamm)
         binding.layoutTeam.imgIcon.setImageResource(R.drawable.ic_team)
 
-        // 🔹 Tombol navigasi ke Activity
+        // Tombol navigasi ke Activity
         binding.layoutHistory.root.setOnClickListener {
             startActivity(Intent(this, ClubHistoryActivity::class.java))
         }
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, TeamSquadActivity::class.java))
         }
 
-        // 🔹 Tombol kembali
+        // Tombol kembali
         binding.btnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
