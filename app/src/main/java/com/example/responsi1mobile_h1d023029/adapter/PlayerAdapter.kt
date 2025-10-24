@@ -29,19 +29,19 @@ class PlayerAdapter(
 
             val bgColor = when (player.position) {
 
-                // 🟡 Goalkeeper
+                // Goalkeeper
                 "Goalkeeper", "GK" -> "#FFD54F" // Kuning
 
-                // 🔵 Defender group
+                // Defender group
                 "Defender", "Defence", "Centre Back", "CB", "Right Back", "RB", "Left Back", "LB" -> "#64B5F6" // Biru
 
-                // 🟢 Midfielder group
+                // Midfielder group
                 "Midfielder", "Midfield", "Defensive Midfield", "DMF", "Central Midfield", "CM", "Attacking Midfield", "AMF" -> "#81C784" // Hijau
 
-                // 🔴 Forward group
+                // Forward group
                 "Forward", "Offence", "Striker", "Centre-Forward", "CF", "Second Striker", "SS", "Winger" -> "#E57373" // Merah
 
-                // ⚪ Default
+                // Default
                 else -> "#E0E0E0"
             }
 
