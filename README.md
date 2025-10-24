@@ -11,63 +11,65 @@ Aplikasi ini menggunakan arsitektur MVVM (Model-View-ViewModel) dengan Repositor
 ## Tampilan Aplikasi
 ![Image](https://github.com/user-attachments/assets/3968a60e-7f30-45c1-bb73-8dd66dc85cec)
 
-## Penjelasan Alur Data dari Pemanggilan API hingga Penyajian di Layar
+# Penjelasan Alur Data dari Pemanggilan API hingga Penyajian di Layar
 
-### 1. Pemanggilan API (Network Layer)
-Pada tahap awal, aplikasi melakukan proses pengambilan data dari server menggunakan **Retrofit**, yaitu library populer untuk komunikasi API berbasis HTTP.
+## 1. Pemanggilan API (Network Layer)
 
-File yang berperan dalam tahap ini adalah:
-- **FootballApiService** → berisi daftar endpoint API yang digunakan untuk mengambil data (misalnya data tim, pelatih, atau pemain).
-- **ApiClient** → mengatur konfigurasi koneksi seperti base URL dan converter untuk mengubah data dari format JSON menjadi objek Kotlin.
+Tahap awal dimulai dengan proses pengambilan data dari server menggunakan Retrofit, yaitu library populer untuk komunikasi API berbasis HTTP.
+
+File yang berperan dalam tahap ini:
+- FootballApiService → Berisi daftar endpoint API yang digunakan untuk mengambil data, seperti daftar tim, pelatih, dan pemain.
+- ApiClient → Mengatur konfigurasi koneksi seperti baseUrl dan converter factory (GsonConverterFactory) untuk mengubah data JSON menjadi objek Kotlin.
 
 Tahap ini memastikan aplikasi dapat berkomunikasi dengan server dan meminta data yang dibutuhkan secara efisien.
 
-### 2. Pengolahan Data dari API (Model Layer)
-Setelah aplikasi menerima data dari server, datanya masih berbentuk JSON mentah.  
-Agar dapat digunakan di dalam aplikasi, data tersebut dikonversi menjadi objek model melalui **Model Layer**.
+## 2. Pengolahan Data dari API (Model Layer)
 
-Model diwakili oleh file:
-- **TeamResponse.kt** → berfungsi sebagai template untuk menyimpan data yang diterima dari server seperti nama tim, logo, pelatih, dan daftar pemain.
+Setelah aplikasi menerima data dari server, datanya masih berupa JSON mentah. Agar bisa digunakan di aplikasi, data tersebut dikonversi menjadi objek model melalui Model Layer.
 
-Dengan adanya model, data menjadi lebih mudah diolah, disimpan, dan ditampilkan ke pengguna.
+Model utama yang digunakan:
+- TeamResponse.kt, yang terdiri dari tiga bagian penting:
+  - TeamResponse → Menyimpan data utama tim seperti id, name, shortName, crest, coach, dan squad.
+  - Coach → Menyimpan data pelatih (id, name, nationality, dateOfBirth).
+  - Player → Menyimpan data pemain (id, name, position, nationality, dateOfBirth). Model ini menggunakan anotasi @Parcelize agar bisa dikirim antar Activity atau Fragment.
 
-### 3. Pengelolaan Data (Repository Layer)
-Tahap selanjutnya adalah pengelolaan data di dalam **FootballRepository**.
+Dengan model ini, struktur data menjadi terorganisir, mudah dikelola, dan siap digunakan di seluruh bagian aplikasi.
 
-Repository berfungsi sebagai penghubung antara API dan ViewModel.  
-Ketika aplikasi membutuhkan data, ViewModel tidak langsung memanggil API, tetapi akan meminta data melalui Repository.
+## 3. Pengelolaan Data (Repository Layer)
 
-Repository kemudian akan menentukan apakah data harus diambil dari:
-- Internet (API), atau  
-- Sumber lokal (misalnya cache atau database, jika ada).
+Lapisan berikutnya adalah FootballRepository, yang berfungsi sebagai penghubung antara API dan ViewModel.
 
-Dengan demikian, Repository bertindak sebagai **Single Source of Truth**, menjaga agar data di aplikasi tetap konsisten.
+Peran utama Repository:
+- Mengatur logika pengambilan data, baik dari API (Retrofit) maupun dari sumber lokal (jika tersedia).
+- Menyediakan data yang sudah siap digunakan oleh ViewModel.
 
-### 4. Manajemen Data dan Lifecycle (ViewModel Layer)
-Setelah Repository mendapatkan data dari API, data tersebut dikirim ke **FootballViewModel**.
+Repository berperan sebagai Single Source of Truth, memastikan data yang disediakan selalu konsisten dan terpusat di seluruh bagian aplikasi.
 
-ViewModel bertanggung jawab untuk:
-- Menyimpan dan mengelola data agar tetap bertahan meskipun terjadi perubahan UI (misalnya rotasi layar).
-- Menyediakan data ke UI melalui **LiveData**, yaitu variabel yang bisa diamati (observable).
+## 4. Manajemen Data dan Lifecycle (ViewModel Layer)
 
-Setiap kali isi LiveData berubah, UI akan otomatis diperbarui tanpa perlu pemanggilan ulang secara manual oleh developer.  
-Hasilnya, aplikasi menjadi lebih responsif dan hemat sumber daya.
+Setelah Repository memperoleh data dari API, data tersebut dikirim ke FootballViewModel.
 
-### 5. Penyajian Data ke Layar (View Layer – Activity & Fragment)
-Data yang telah disiapkan oleh ViewModel kemudian diamati oleh berbagai komponen UI, seperti:
-- **TeamSquadActivity**
-- **ClubHistoryActivity**
-- **HeadCoachActivity**
+Fungsi ViewModel:
+- Menyimpan dan mengelola data agar tetap bertahan meskipun terjadi perubahan konfigurasi seperti rotasi layar.
+- Menyediakan data ke UI melalui LiveData, objek yang dapat diamati (observable).
 
-Saat ViewModel mengirimkan data baru, komponen UI ini langsung menampilkan informasi di layar.  
-Activity tidak perlu lagi menulis ulang logika pemanggilan API karena semuanya sudah ditangani di ViewModel dan Repository.
+Ketika LiveData berubah, UI akan otomatis diperbarui tanpa perlu pemanggilan ulang manual, membuat aplikasi lebih responsif dan efisien.
 
-Tahap ini bertanggung jawab penuh untuk menyajikan data dalam bentuk tampilan yang mudah dipahami pengguna.
+## 5. Penyajian Data ke Layar (View Layer – Activity & Fragment)
 
-### 6. Tampilan Akhir di UI (Adapter dan Layout XML)
-Tahap terakhir adalah penyajian data dalam bentuk tampilan visual interaktif.
+Data yang telah dikelola oleh ViewModel diamati oleh berbagai komponen UI seperti:
+- TeamSquadActivity
+- ClubHistoryActivity
+- HeadCoachActivity
 
-Data yang diterima dari ViewModel akan diteruskan ke **Adapter**, misalnya **PlayerAdapter**, yang bertugas menampilkan data dalam **RecyclerView**.  
-Setiap elemen data (nama pemain, posisi, dan gambar) ditampilkan menggunakan **layout XML**, seperti **item_player.xml**.
+Komponen UI ini akan memperbarui tampilan secara otomatis ketika data pada ViewModel berubah. Dengan arsitektur MVVM, Activity tidak perlu memanggil API secara langsung karena seluruh proses sudah dikelola oleh Repository dan ViewModel. Hasilnya, kode menjadi lebih bersih dan mudah dirawat.
 
-Dengan pendekatan ini, setiap komponen di layar memiliki desain yang konsisten, rapi, dan mudah diubah sesuai kebutuhan tampilan.
+## 6. Tampilan Akhir di UI (Adapter & Layout XML)
+
+Tahap terakhir adalah penyajian data ke pengguna melalui tampilan interaktif.
+
+Komponen utama:
+- PlayerAdapter → Bertugas menampilkan data pemain ke dalam RecyclerView.
+- item_player.xml → Mengatur tampilan tiap item seperti nama pemain, posisi, dan gambar profil.
+
+Dengan pendekatan ini, tampilan data menjadi dinamis, konsisten, dan mudah disesuaikan dengan kebutuhan desain aplikasi.
