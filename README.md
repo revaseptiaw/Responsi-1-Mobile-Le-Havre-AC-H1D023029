@@ -38,7 +38,7 @@ Model utama yang digunakan:
 Lapisan berikutnya adalah FootballRepository, yang berfungsi sebagai penghubung antara API dan ViewModel.
 
 Peran utama Repository:
-- Mengatur logika pengambilan data, baik dari API (Retrofit) maupun dari sumber lokal (jika tersedia).
+- Mengatur logika pengambilan data, baik dari API (Retrofit) maupun dari sumber lokal.
 - Menyediakan data yang sudah siap digunakan oleh ViewModel.
 
 Repository berperan sebagai Single Source of Truth, memastikan data yang disediakan selalu konsisten dan terpusat di seluruh bagian aplikasi.
