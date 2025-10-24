@@ -33,8 +33,6 @@ Model utama yang digunakan:
   - Coach → Menyimpan data pelatih (id, name, nationality, dateOfBirth).
   - Player → Menyimpan data pemain (id, name, position, nationality, dateOfBirth). Model ini menggunakan anotasi @Parcelize agar bisa dikirim antar Activity atau Fragment.
 
-Dengan model ini, struktur data menjadi terorganisir, mudah dikelola, dan siap digunakan di seluruh bagian aplikasi.
-
 ## 3. Pengelolaan Data (Repository Layer)
 
 Lapisan berikutnya adalah FootballRepository, yang berfungsi sebagai penghubung antara API dan ViewModel.
