@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Responsi1Mobile_H1D023029</string>
+
+    <!-- Informasi Klub -->
+    <string name="club_name">Le Havre Athletic Club</string>
+    <string name="desc_club">
+        Le Havre Athletic Club (HAC) adalah klub sepak bola tertua di Prancis,
+        didirikan pada tahun 1872. Bermarkas di Stade Océane, Le Havre,
+        klub ini dikenal dengan warna biru langit dan biru laut sebagai identitasnya.
+        Sepanjang sejarahnya, HAC telah berperan penting dalam pembinaan pemain muda
+        dan melahirkan banyak bintang sepak bola Prancis.
+    </string>
+
+    <!-- Menu Navigasi -->
+    <string name="history">Club History</string>
+    <string name="coach">Head Coach</string>
+    <string name="teamm">Team Squad</string>
+    <string name="back">Kembali</string>
+</resources>

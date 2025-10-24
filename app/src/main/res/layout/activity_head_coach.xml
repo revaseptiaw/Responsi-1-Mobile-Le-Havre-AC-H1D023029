@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="#FFF4F6FF"
+    android:padding="16dp"
+    tools:context=".ui.HeadCoachActivity">
+
+    <!-- 🖼️ Foto Pelatih -->
+    <ImageView
+        android:id="@+id/imgCoach"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_coach"
+        android:contentDescription="Foto Pelatih" />
+
+    <!-- 🧾 CardView Data Pelatih -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCoachInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#90CAF9">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvCoachName"
+                android:textStyle="bold|italic"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvCoachBirth"
+                android:textColor="#000"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvCoachCountry"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- 🔙 Tombol Kembali -->
+    <Button
+        android:id="@+id/btnBackCoach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Kembali"
+        android:backgroundTint="#0D47A1"
+        android:textColor="@android:color/white" />
+</LinearLayout>
