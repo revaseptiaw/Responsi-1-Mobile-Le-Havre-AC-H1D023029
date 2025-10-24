@@ -55,10 +55,12 @@ Ketika LiveData berubah, UI akan otomatis diperbarui tanpa perlu pemanggilan ula
 
 ## 5. Penyajian Data ke Layar (View Layer – Activity & Fragment)
 
-Data yang telah dikelola oleh ViewModel diamati oleh berbagai komponen UI seperti:
-- TeamSquadActivity
-- ClubHistoryActivity
-- HeadCoachActivity
+Data yang telah dikelola oleh ViewModel diamati oleh berbagai komponen UI, baik berupa Activity maupun Fragment, yang bertanggung jawab untuk menampilkan informasi ke pengguna.
+Komponen UI yang berperan dalam tahap ini meliputi:
+- TeamSquadActivity → Menampilkan daftar pemain dari suatu tim dalam bentuk RecyclerView.
+- ClubHistoryActivity → Menampilkan sejarah tentang klub.
+- HeadCoachActivity → Menampilkan informasi pelatih utama dari tim.
+- TeamDetailFragment → Menampilkan detail biodata lengkap dari pemain yang dipilih, seperti nama, posisi, kebangsaan, dan tanggal lahir.
 
 Komponen UI ini akan memperbarui tampilan secara otomatis ketika data pada ViewModel berubah. Dengan arsitektur MVVM, Activity tidak perlu memanggil API secara langsung karena seluruh proses sudah dikelola oleh Repository dan ViewModel. Hasilnya, kode menjadi lebih bersih dan mudah dirawat.
 
